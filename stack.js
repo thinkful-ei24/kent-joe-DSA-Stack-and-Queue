@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
 class _Node {
   constructor(data, next) {
     this.data = data;
@@ -116,18 +118,18 @@ function stackSort(stack) { //stack: 1
   let tempNum; //3
   let current = stack.top; //3
 
-  while(current !== null) {//
-    if(newStack.top === null) {
+  while (current !== null) {//
+    if (newStack.top === null) {
       newStack.push(stack.pop());
     } else if (current.data <= newStack.top.data) {
       newStack.push(stack.pop());
     } else if (current.data > newStack.top.data) {
       tempNum = stack.pop();
-      while( newStack.top !== null || (newStack.top && tempNum > newStack.top.data)) {
+      while (newStack.top !== null || (newStack.top && tempNum > newStack.top.data)) {
         stack.push(newStack.pop());
       }
       newStack.push(tempNum);
-    } 
+    }
     current = stack.top;
   }
 
@@ -146,3 +148,4 @@ numStack.push(5);
 
 // const toDisplay = stackSort(numStack);
 // console.log(display(toDisplay));
+
