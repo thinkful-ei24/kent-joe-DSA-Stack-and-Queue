@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+// const {_Node stackyNode} = require('./stack');
+const {Stack} = require('./stack');
 
 class _Node {
   constructor(value) {
@@ -82,4 +84,53 @@ function main() {
   console.log('Display: ', display(starTrekQ));
 }
 
-main();
+// main();
+
+class stackyQueue {
+  constructor() {
+    this.queueStack = new Stack();
+    this.secondStack = new Stack();
+  }
+
+  enqueue(value) {
+    if(!this.queueStack.top) {
+      return this.queueStack.push(value);
+    }
+    if(this.queueStack.top) {
+      let current= this.queueStack.top;
+
+      while(current !== null) {
+        this.secondStack.push(this.queueStack.pop());
+        current = this.queueStack.top;
+      }
+
+      this.queueStack.push(value);
+      current = this.secondStack.top;
+
+      while(current !== null) {
+        this.queueStack.push(this.secondStack.pop());
+        current = this.secondStack.top;
+      }
+    }
+  }
+
+  dequeue() {
+    return this.queueStack.pop();
+  }
+}
+
+const kentStack = new stackyQueue();
+
+kentStack.enqueue(1);
+kentStack.enqueue(2);
+kentStack.enqueue(3);
+kentStack.enqueue(4);
+kentStack.enqueue(5);
+kentStack.enqueue(6);
+kentStack.enqueue(8);
+kentStack.enqueue(9);
+kentStack.enqueue(10);
+kentStack.enqueue(11);
+
+
+

@@ -149,3 +149,4 @@ numStack.push(5);
 // const toDisplay = stackSort(numStack);
 // console.log(display(toDisplay));
 
+module.exports = {_Node, Stack};
