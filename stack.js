@@ -61,4 +61,24 @@ function main() {
   console.log('display no mckoy', display(starTrek));
 }
 
-main();
+function is_palindrome(s) {
+  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  const stack = new Stack();
+  for(let i=0; i < s.length; i++) {
+    stack.push(s[i]);
+  }
+  let reverseS= '';
+  let current = stack.top;
+  while(current !== null) {
+    reverseS += current.data;
+    current = current.next;
+  }
+
+  if(reverseS === s) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// console.log(is_palindrome('A man, a Plan, A CaNaL: PanaMa'));
