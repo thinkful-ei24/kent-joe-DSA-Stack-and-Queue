@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 // const {_Node stackyNode} = require('./stack');
-const {Stack} = require('./stack');
+const { Stack } = require('./stack');
 
 class _Node {
   constructor(value) {
@@ -93,13 +93,13 @@ class stackyQueue {
   }
 
   enqueue(value) {
-    if(!this.queueStack.top) {
+    if (!this.queueStack.top) {
       return this.queueStack.push(value);
     }
-    if(this.queueStack.top) {
+    if (this.queueStack.top) {
       let current= this.queueStack.top;
 
-      while(current !== null) {
+      while (current !== null) {
         this.secondStack.push(this.queueStack.pop());
         current = this.queueStack.top;
       }
@@ -107,7 +107,7 @@ class stackyQueue {
       this.queueStack.push(value);
       current = this.secondStack.top;
 
-      while(current !== null) {
+      while (current !== null) {
         this.queueStack.push(this.secondStack.pop());
         current = this.secondStack.top;
       }
@@ -133,4 +133,57 @@ kentStack.enqueue(10);
 kentStack.enqueue(11);
 
 
+function squareDance(queue) {
+  const spares = new Queue();
+  let maleDancer;
+  let femaleDancer;
+  let current = queue.first;
+  while (current) {
+    if (!spares.first) {
+      spares.enqueue(queue.dequeue());
+    } else {
+      if (spares.first.value.gender === queue.first.value.gender) {
+        spares.enqueue(queue.dequeue());
+      } else {
+        const dancer1 = spares.dequeue();
+        const dancer2 = queue.dequeue();
+        if (dancer1.gender === 'M') {
+          maleDancer = dancer1;
+          femaleDancer = dancer2;
+        } else {
+          maleDancer = dancer2;
+          femaleDancer = dancer1;
+        }
+        console.log(`Female dancer is: ${femaleDancer.name} and the male dancer is: ${maleDancer.name}`);
+      }
+    }
+    current = queue.first;
+  }
 
+  let count = 0;
+  let gender = '';
+  current = spares.first;
+
+  while (current) {
+    count++;
+    gender = current.value.gender;
+    spares.dequeue();
+    current = spares.first;
+  }
+  if (count) {
+    console.log(`There are ${count} ${gender} dancers waiting to dance`);
+  }
+  return spares;
+}
+
+const dancers = new Queue();
+dancers.enqueue({ gender: 'F', name: 'Jane' });
+dancers.enqueue({ gender: 'M', name: 'Frank' });
+dancers.enqueue({ gender: 'M', name: 'John' });
+dancers.enqueue({ gender: 'M', name: 'Sherlock' });
+dancers.enqueue({ gender: 'F', name: 'Madonna' });
+dancers.enqueue({ gender: 'M', name: 'David' });
+dancers.enqueue({ gender: 'M', name: 'Christopher' });
+dancers.enqueue({ gender: 'F', name: 'Beyonce' });
+
+squareDance(dancers);
