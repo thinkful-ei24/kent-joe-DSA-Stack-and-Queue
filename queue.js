@@ -186,4 +186,36 @@ dancers.enqueue({ gender: 'M', name: 'David' });
 dancers.enqueue({ gender: 'M', name: 'Christopher' });
 dancers.enqueue({ gender: 'F', name: 'Beyonce' });
 
-squareDance(dancers);
+// squareDance(dancers);
+
+function bankQueue (queue) {
+  let current = queue.first;
+  let messup = Math.floor(Math.random() * Math.floor(4));
+
+  while(current) {
+    if(messup === 0) {
+      queue.enqueue(queue.dequeue);
+    } else {
+    queue.dequeue();
+    }
+    messup = Math.floor(Math.random() * Math.floor(4));
+    current = queue.first; 
+  }
+
+  return 'No one is left';
+}
+
+const bankQ = new Queue();
+
+bankQ.enqueue(1);
+bankQ.enqueue(2);
+bankQ.enqueue(3);
+bankQ.enqueue(4);
+bankQ.enqueue(5);
+bankQ.enqueue(6);
+bankQ.enqueue(7);
+bankQ.enqueue(8);
+bankQ.enqueue(9);
+bankQ.enqueue(10);
+
+console.log(bankQueue(bankQ));
