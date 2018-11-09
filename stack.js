@@ -38,7 +38,6 @@ function display(stack) {
   let list = [];
 
   while (current !== null) {
-    console.log('current in loop', current);
     list.push(current);
     current = current.next;
   }
@@ -110,4 +109,40 @@ function checkParentheses(s) {
   return 'no problems';
 }
 
-console.log(checkParentheses('(())())(())'));
+// console.log(checkParentheses('(())())(())'));
+
+function stackSort(stack) { //stack: 1
+  const newStack = new Stack(); //  1, 2, 3, 4
+  let tempNum; //3
+  let current = stack.top; //3
+
+  while(current !== null) {//
+    if(newStack.top === null) {
+      newStack.push(stack.pop());
+    } else if (current.data <= newStack.top.data) {
+      newStack.push(stack.pop());
+    } else if (current.data > newStack.top.data) {
+      tempNum = stack.pop();
+      while( newStack.top !== null || (newStack.top && tempNum > newStack.top.data)) {
+        stack.push(newStack.pop());
+      }
+      newStack.push(tempNum);
+    } 
+    current = stack.top;
+  }
+
+  return newStack;
+}
+
+const numStack = new Stack();
+
+numStack.push(3);
+numStack.push(4);
+numStack.push(1);
+numStack.push(2);
+numStack.push(6);
+numStack.push(5);
+
+
+// const toDisplay = stackSort(numStack);
+// console.log(display(toDisplay));
