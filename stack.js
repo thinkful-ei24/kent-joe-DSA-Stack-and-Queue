@@ -29,12 +29,36 @@ class Stack {
   }
 }
 
+function peek(stack) {
+  return stack.top;
+}
+
+function display(stack) {
+  let current = stack.top;
+  let list = [];
+
+  while(current !== null) {
+    console.log('current in loop', current);
+    list.push(current);
+    current = current.next;
+  }
+  return list;
+}
+
 function main() {
   const starTrek = new Stack();
   starTrek.push('Kirk');
   starTrek.push('Spock');
   starTrek.push('McCoy');
   starTrek.push('Scotty');
+
+  console.log('peeking', peek(starTrek));
+  console.log('display', display(starTrek));
+
+  starTrek.pop();
+  starTrek.pop();
+
+  console.log('display no mckoy', display(starTrek));
 }
 
 main();
