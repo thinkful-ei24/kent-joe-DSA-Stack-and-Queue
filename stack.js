@@ -37,7 +37,7 @@ function display(stack) {
   let current = stack.top;
   let list = [];
 
-  while(current !== null) {
+  while (current !== null) {
     console.log('current in loop', current);
     list.push(current);
     current = current.next;
@@ -62,19 +62,19 @@ function main() {
 }
 
 function is_palindrome(s) {
-  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
   const stack = new Stack();
-  for(let i=0; i < s.length; i++) {
+  for (let i=0; i < s.length; i++) {
     stack.push(s[i]);
   }
   let reverseS= '';
   let current = stack.top;
-  while(current !== null) {
+  while (current !== null) {
     reverseS += current.data;
     current = current.next;
   }
 
-  if(reverseS === s) {
+  if (reverseS === s) {
     return true;
   } else {
     return false;
@@ -82,3 +82,32 @@ function is_palindrome(s) {
 }
 
 // console.log(is_palindrome('A man, a Plan, A CaNaL: PanaMa'));
+
+
+function checkParentheses(s) {
+  const stack = new Stack();
+  let open = 0;
+  for (let i=0; i<s.length; i++) {
+    if (s[i] === '(') {
+      if (!stack.top) {
+        open = i;
+      }
+      stack.push(s[i]);
+    } else if (s[i] === ')') {
+      if (!stack.top) {
+        return `fix your stuff at ${i}`;
+      }
+      const popped = stack.pop();
+      if (popped !== '(') {
+        return `fix your stuff at ${i}`;
+      }
+    }
+  }
+
+  if (stack.top) {
+    return `open parentheses at ${open}`;
+  }
+  return 'no problems';
+}
+
+console.log(checkParentheses('(())())(())'));
